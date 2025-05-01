@@ -12,9 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       working-directory: ./product_service
-    defaults:
-    runs:
-      working-directory: ${{env.working-directory}}
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 21
