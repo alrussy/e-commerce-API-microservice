@@ -16,7 +16,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import product_app.model.dto.category_dto.CategoryResponse;
 import product_app.model.entities.table.BrandCategory;
@@ -29,7 +28,6 @@ import product_app.model.entities.table.BrandCategory;
 @Entity
 @Table(name = "categories")
 @EntityListeners(AuditingEntityListener.class)
-@Slf4j
 public class Category extends Audition {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
