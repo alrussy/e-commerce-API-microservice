@@ -1,13 +1,9 @@
 package product_app.model.entities.id;
 
-import java.io.Serializable;
-
-import product_app.model.entities.Brand;
-import product_app.model.entities.Category;
-
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -22,14 +18,14 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class ProductId implements Serializable{/**
-	 * 
-	 */
-	private static final long serialVersionUID = -293757139257770506L;
-	
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long productId;
-	private Long categoryId;
-	
+public class ProductId implements Serializable {
+    /**
+     *
+     */
+    private static final long serialVersionUID = -293757139257770506L;
 
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long productId;
+
+    private Long categoryId;
 }

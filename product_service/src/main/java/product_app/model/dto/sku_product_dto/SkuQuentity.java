@@ -1,9 +1,5 @@
 package product_app.model.dto.sku_product_dto;
 
-import java.util.List;
-
-import product_app.model.entities.Details;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,6 +15,6 @@ import lombok.ToString;
 @NoArgsConstructor
 public class SkuQuentity {
 
-	private String skuCode;
-	private Integer quentity;
+    private String skuCode;
+    private Integer quentity;
 }
