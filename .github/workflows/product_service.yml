@@ -37,4 +37,4 @@ jobs:
       name: Build And Publish Docker Image
       run: 
        ./mvnw  spring-boot:build-image -DskipTests
-        docker push ${{secrets.DOCKER_USERNAME}}/e-ccommerce-product_service
+        docker push ${{secrets.DOCKERHUB_USERNAME}}/e-ccommerce-product_service
