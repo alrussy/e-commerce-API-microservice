@@ -36,5 +36,5 @@ jobs:
     - if: ${{github.ref=='refs/heads/main'}}
       name: Build And Publish Docker Image
       run: 
-       ./mvnw  spring-boot:build-image -DskipTests
+        mvn  spring-boot:build-image -DskipTests
         docker push ${{securit.DOCKER_NAME}}/e-ccommerce-product_service
