@@ -1,0 +1,21 @@
+version: '3.8'
+name: 'e-ccommerce-API'
+services:
+  product-service:
+    image: alrussydev/e-ccommerce-product_service
+    container_name: product-service
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      URL_DB:jdbc: mysql://product-db:3306/product
+      DB_USERNAME: user
+      DB_PASSWORD: password
+    ports:
+      - "9091:9091"
+    restart: unless-stopped
+    depends_on:
+     product_db:
+      condition:service-healthy
+    deploy:
+      resource:
+        limits:
+          memory: 700m 
