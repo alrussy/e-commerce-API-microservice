@@ -7,8 +7,12 @@ import product_app.model.entities.Category;
 public class CategoryMapper {
 
     public static Category toEntity(CategoryRequest request) {
-
-        return null;
+        var category = Category.builder()
+                .name(request.name())
+                .isFeature(request.isFeature())
+                .imageUrl(request.imageUrl())
+                .build();
+        return category;
     }
 
     public static CategoryResponse fromEntity(Category entity) {

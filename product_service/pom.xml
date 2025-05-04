@@ -28,6 +28,7 @@
   </scm>
   <properties>
     <java.version>21</java.version>
+    <dockerImageName>alrussydev/e-ccommerce-${project.artifactId}</dockerImageName>
   </properties>
 
   <dependencies>
@@ -126,7 +127,11 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+
         <configuration>
+          <image>
+            <name>${dockerImageName}</name>
+          </image>
           <additionalProperties>
             <java.version>${java.version}</java.version>
             <project.version>${project.version}</project.version>

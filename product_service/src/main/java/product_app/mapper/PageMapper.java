@@ -1,12 +1,12 @@
 package product_app.mapper;
 
 import org.springframework.data.domain.Page;
-import product_app.model.dto.PageResponse;
+import product_app.model.dto.PageResult;
 
 public class PageMapper<T> {
 
-    public PageResponse<T> toPageResponse(Page<T> page) {
-        return new PageResponse<T>(
+    public PageResult<T> toPageResponse(Page<T> page) {
+        return new PageResult<T>(
                 page.getContent(),
                 page.getTotalElements(),
                 page.getTotalPages(),

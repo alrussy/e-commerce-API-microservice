@@ -7,7 +7,11 @@ import product_app.model.entities.Brand;
 public class BrandMapper {
 
     public static Brand toEntity(BrandRequest request) {
-        return null;
+        return Brand.builder()
+                .name(request.name())
+                .imageUrl(request.imageUrl())
+                .isFeature(request.isFeature())
+                .build();
     }
 
     public static BrandResponse fromEntity(Brand entity) {
