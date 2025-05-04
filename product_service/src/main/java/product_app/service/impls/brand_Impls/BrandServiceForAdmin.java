@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import product_app.mapper.BrandMapper;
 import product_app.mapper.PageMapper;
-import product_app.model.dto.PageResult;
+import product_app.model.dto.PagedResult;
 import product_app.model.dto.brand_dto.BrandRequest;
 import product_app.model.dto.brand_dto.BrandResponse;
 import product_app.model.entities.Brand;
@@ -25,7 +25,7 @@ public class BrandServiceForAdmin implements BaseBrandService {
     private final BrandRepository brandRepository;
 
     @Override
-    public PageResult<BrandResponse> findAll(int pageNumber) {
+    public PagedResult<BrandResponse> findAll(int pageNumber) {
         var page = PageRequest.of(pageNumber, 10);
 
         return new PageMapper<BrandResponse>()

@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import product_app.mapper.CategoryMapper;
 import product_app.mapper.DepartmentMapper;
 import product_app.mapper.PageMapper;
-import product_app.model.dto.PageResult;
+import product_app.model.dto.PagedResult;
 import product_app.model.dto.category_dto.CategoryRequest;
 import product_app.model.dto.category_dto.CategoryResponse;
 import product_app.model.entities.Category;
@@ -29,7 +29,7 @@ public class CategoryServiceForAdmin implements BaseCategoryService {
     private final DepartmentServiceImpl departmentService;
 
     @Override
-    public PageResult<CategoryResponse> findAll(int pageNumber) {
+    public PagedResult<CategoryResponse> findAll(int pageNumber) {
         var page = PageRequest.of(pageNumber, 10);
 
         return new PageMapper<CategoryResponse>()

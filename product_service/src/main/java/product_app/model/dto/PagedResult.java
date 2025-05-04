@@ -2,7 +2,7 @@ package product_app.model.dto;
 
 import java.util.List;
 
-public record PageResult<T>(
+public record PagedResult<T>(
         List<T> data,
         long totalElements,
         int pageNumber,

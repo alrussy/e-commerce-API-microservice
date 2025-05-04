@@ -10,7 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import product_app.mapper.PageMapper;
 import product_app.mapper.ProductMapper;
-import product_app.model.dto.PageResult;
+import product_app.model.dto.PagedResult;
 import product_app.model.dto.product_dto.ProductRequest;
 import product_app.model.dto.product_dto.ProductResponse;
 import product_app.model.entities.Brand;
@@ -28,7 +28,7 @@ public class ProductServiceForAdmin implements BaseProductService {
     private final ProductRepository productRepository;
 
     @Override
-    public PageResult<ProductResponse> findAll(int pageNumber) {
+    public PagedResult<ProductResponse> findAll(int pageNumber) {
         var page = PageRequest.of(pageNumber, 10);
 
         return new PageMapper<ProductResponse>()

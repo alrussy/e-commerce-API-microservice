@@ -1,12 +1,12 @@
 package product_app.service;
 
 import jakarta.persistence.MappedSuperclass;
-import product_app.model.dto.PageResult;
+import product_app.model.dto.PagedResult;
 
 @MappedSuperclass
 public interface BaseService<ID, DtoResponse, DtoRequest> {
 
-    PageResult<DtoResponse> findAll(int pageNum);
+    PagedResult<DtoResponse> findAll(int pageNum);
 
     DtoResponse findById(ID id);
 

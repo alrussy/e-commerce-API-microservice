@@ -8,7 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import product_app.mapper.DepartmentMapper;
 import product_app.mapper.PageMapper;
-import product_app.model.dto.PageResult;
+import product_app.model.dto.PagedResult;
 import product_app.model.dto.department_dto.DepartmentRequest;
 import product_app.model.dto.department_dto.DepartmentResponse;
 import product_app.model.entities.Department;
@@ -23,7 +23,7 @@ public class DepartmentServiceImpl implements BaseDepartmentService {
     private final DepartmentRepository departmentRepository;
 
     @Override
-    public PageResult<DepartmentResponse> findAll(int pageNumber) {
+    public PagedResult<DepartmentResponse> findAll(int pageNumber) {
         var page = PageRequest.of(pageNumber, 10);
 
         return new PageMapper<DepartmentResponse>()

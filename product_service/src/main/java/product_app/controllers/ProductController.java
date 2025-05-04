@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import product_app.model.dto.PageResult;
+import product_app.model.dto.PagedResult;
 import product_app.model.dto.product_dto.ProductResponse;
 import product_app.service.BaseProductService;
 
@@ -19,7 +19,7 @@ public class ProductController {
     final BaseProductService service;
 
     @GetMapping
-    public ResponseEntity<PageResult<ProductResponse>> findAll(@RequestParam(defaultValue = "1") Integer pageNumber) {
+    public ResponseEntity<PagedResult<ProductResponse>> findAll(@RequestParam(defaultValue = "1") Integer pageNumber) {
         return ResponseEntity.ok(service.findAll(pageNumber));
     }
 }

@@ -12,7 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import product_app.mapper.PageMapper;
 import product_app.mapper.SkuProductMapper;
-import product_app.model.dto.PageResult;
+import product_app.model.dto.PagedResult;
 import product_app.model.dto.sku_product_dto.SkuProductRequest;
 import product_app.model.dto.sku_product_dto.SkuProductResponse;
 import product_app.model.entities.Details;
@@ -29,7 +29,7 @@ public class SkuProductServiceImpl implements BaseSkuProductService {
     // private final WebClient client;
 
     @Override
-    public PageResult<SkuProductResponse> findAll(int pageNumber) {
+    public PagedResult<SkuProductResponse> findAll(int pageNumber) {
         var page = PageRequest.of(pageNumber, 10);
 
         return new PageMapper<SkuProductResponse>()
