@@ -1,21 +1,39 @@
-version: '3.8'
+
+version: "3.8"
 name: 'e-ccommerce-API'
 services:
+  product-db:
+    image: mysql:8.0
+    container_name: product-db
+    environment:
+      MYSQL_ROOT_PASSWORD: 654321
+      MYSQL_DATABASE: product
+      MySQL_USERNAME: root
+      MYSQL_PASSWORD: root
+    ports:
+      - "33065:3306"
+    healthcheck: 
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  
   product-service:
     image: alrussydev/e-ccommerce-product_service
     container_name: product-service
+    depends_on:
+      product-db:
+       condition: service_healthy
     environment:
       SPRING_PROFILES_ACTIVE: docker
-      URL_DB:jdbc: mysql://product-db:3306/product
-      DB_USERNAME: user
-      DB_PASSWORD: password
+      MYSQL_URL: jdbc:mysql://product-db:3306/product?useUnicode=yes&characterEncoding=UTF-8
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: 654321
     ports:
       - "9091:9091"
     restart: unless-stopped
-    depends_on:
-     product_db:
-      condition:service-healthy
     deploy:
-      resource:
-        limits:
-          memory: 700m 
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+   
