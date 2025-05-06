@@ -28,7 +28,7 @@
   </scm>
   <properties>
     <java.version>21</java.version>
-    <dockerImageName>alrussydev/e-ccommerce-${project.artifactId}</dockerImageName>
+    <dockerImageName>alruusydev/e-ccommerce-${project.artifactId}</dockerImageName>
   </properties>
 
   <dependencies>
