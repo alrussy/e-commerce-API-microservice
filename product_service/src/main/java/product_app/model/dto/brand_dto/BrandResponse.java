@@ -4,9 +4,4 @@ import java.util.List;
 import product_app.model.dto.category_dto.CategoryResponse;
 
 public record BrandResponse(
-        Long id,
-        String name,
-        String imageUrl,
-        Boolean isFeature,
-        Integer productCount,
-        List<CategoryResponse> categories) {}
+        Long id, String name, String imageUrl, Integer productCount, List<CategoryResponse> categories) {}

@@ -8,7 +8,11 @@ public interface BaseBrandService extends BaseService<Long, BrandResponse, Brand
 
     List<BrandResponse> findByCategory(Long id);
 
-    List<BrandResponse> findByIsFeature();
-
     BrandResponse findByName(String name);
+
+    List<BrandResponse> findAllWithProductCount();
+
+    BrandResponse findByIdWithProductCount(Long id);
+
+    List<BrandResponse> findByCategoryWithProductCount(Long id);
 }

@@ -59,10 +59,4 @@ public interface BrandRepository extends JpaRepository<Brand, Long> {
     @Modifying
     @Query(value = "delete from brand_category b where b.brand_id = ?1", nativeQuery = true)
     int deleteBrand(Long brandId);
-
-    @Query(
-            value =
-                    "select *,(select COUNT(*)  from  products as p where p.brand_id=b.id) as product_count from brands as b where b.is_feature =?1",
-            nativeQuery = true)
-    List<BrandProjectionGlobal> findByIsFeatureWithCount(boolean isfeature);
 }

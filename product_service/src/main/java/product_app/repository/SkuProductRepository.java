@@ -41,20 +41,12 @@ public interface SkuProductRepository extends JpaRepository<SkuProduct, String>,
     Page<SkuProduct> findAllByIsPrimary(Pageable pageable, boolean isPrimary);
 
     /**
-     * this method to find skuProducts where isFeature=true  and isPrimary=true
-     * @param pageable
-     * @param isFeatre
-     * @param isPrimary
-     * @return Page<SkuProduct>
-     */
-    Page<SkuProduct> findAllByProductIsFeatureAndIsPrimary(Pageable pageable, boolean isFeatre, boolean isPrimary);
-    /**
      * this method to find first 5 skuProducts where department id= id and isPrimary=true
      * @param id
      * @param isPrimary
      * @return List<SkuProduct>
      */
-    List<SkuProduct> findFirst5ByProductDepartmentIdDepartmentIdAndIsPrimary(Long id, Boolean isPrimary);
+    List<SkuProduct> findFirst5ByProductDepartmentDepartmentIdAndIsPrimary(Long departmentId, Boolean isPrimary);
 
     /**
      * this method to find first 3 skuProducts where brand id= id and isPrimary=true

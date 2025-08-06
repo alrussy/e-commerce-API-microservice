@@ -12,7 +12,7 @@ public interface BaseService<ID, DtoResponse, DtoRequest> {
 
     void delete(ID id);
 
-    DtoResponse save(DtoRequest request);
+    ID save(DtoRequest request);
 
     DtoResponse update(ID id, DtoRequest request) throws Exception;
 

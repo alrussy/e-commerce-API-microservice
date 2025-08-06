@@ -1,0 +1,4 @@
+com\alrussy_dev\gateway_api\SwaggerConfig.class
+com\alrussy_dev\gateway_api\SecuriyConfig.class
+com\alrussy_dev\gateway_api\OpenAPIConfig.class
+com\alrussy_dev\gateway_api\GatewayServiceApplication.class

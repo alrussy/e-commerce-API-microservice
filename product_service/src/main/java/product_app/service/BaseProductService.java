@@ -9,5 +9,5 @@ public interface BaseProductService extends BaseService<Long, ProductResponse, P
 
     List<ProductResponse> findByBrandId(Long bransId);
 
-    Map<Object, List<ProductResponse>> findByDepartmentIds(List<Long> departmentIds);
+    Map<Object, List<ProductResponse>> findByDepartmentIds(List<String> departmentIds);
 }

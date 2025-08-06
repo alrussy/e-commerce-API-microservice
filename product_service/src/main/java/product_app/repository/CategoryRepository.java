@@ -20,15 +20,13 @@ public interface CategoryRepository extends JpaRepository<Category, Long>, JpaSp
 
     @Transactional
     @Modifying
-    @Query(value = "delete from name_details_category cd where cd.category_id = ?1", nativeQuery = true)
-    int deleteCategorydetailsName(Long categoryId);
+    @Query(value = "delete from departments d where d.category_id = ?1", nativeQuery = true)
+    int deleteDepartments(Long categoryId);
 
     @Transactional
     @Modifying
-    @Query(
-            value = "INSERT INTO name_details_category (category_id, name_details_id) VALUES (?1, ?2)",
-            nativeQuery = true)
-    int saveWithNameDetails(Long categoryId, String detailsnameId);
+    @Query(value = "INSERT INTO departments (category_id,name ) VALUES (?1, ?2)", nativeQuery = true)
+    int saveDepartments(Long categoryId, String name);
 
     @Transactional
     @Modifying
@@ -37,6 +35,4 @@ public interface CategoryRepository extends JpaRepository<Category, Long>, JpaSp
 
     @EntityGraph(attributePaths = {"brandCategory.brand"})
     List<Category> findAll();
-
-    List<Category> findByIsFeatureEquals(Boolean isFeature);
 }

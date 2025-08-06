@@ -18,7 +18,7 @@ public interface ProductRepository extends JpaRepository<Product, ProductId>, Jp
 
     Boolean existsByBrandId(Long brandId);
 
-    Boolean existsByDepartmentIdDepartmentId(Long departmentId);
+    Boolean existsByDepartmentDepartmentId(Long departmentId);
 
     @EntityGraph(attributePaths = {"brand", "brandCategory.brand", "department.category"})
     List<Product> findAll();
@@ -31,7 +31,7 @@ public interface ProductRepository extends JpaRepository<Product, ProductId>, Jp
 
     int countByBrandId(Long id);
 
-    List<Product> findFirst5ByDepartmentIdDepartmentId(Long departmentIds);
+    List<Product> findFirst5ByDepartmentName(String departmentIds);
 
-    List<Product> findByDepartmentIdDepartmentIdIn(List<Long> departmentIds);
+    List<Product> findByDepartmentNameIn(List<String> departmentIds);
 }

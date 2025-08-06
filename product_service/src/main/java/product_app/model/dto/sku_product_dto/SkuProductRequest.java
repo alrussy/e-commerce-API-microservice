@@ -3,7 +3,7 @@ package product_app.model.dto.sku_product_dto;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import java.util.List;
-import product_app.model.entities.Details;
+import product_app.model.dto.details_dto.SkuProductDetailsRequest;
 
 public record SkuProductRequest(
         @NotNull Long productId,
@@ -11,6 +11,5 @@ public record SkuProductRequest(
         @NotNull Double price,
         @NotNull Double discount,
         @NotNull String currency,
-        Boolean isPrimary,
         @NotNull @NotEmpty List<String> imageUrls,
-        @NotEmpty @NotNull List<Details> details) {}
+        @NotEmpty @NotNull List<SkuProductDetailsRequest> details) {}

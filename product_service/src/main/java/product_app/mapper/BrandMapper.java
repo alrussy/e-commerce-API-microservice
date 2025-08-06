@@ -4,17 +4,9 @@ import product_app.model.dto.brand_dto.BrandRequest;
 import product_app.model.dto.brand_dto.BrandResponse;
 import product_app.model.entities.Brand;
 
-public class BrandMapper {
+public interface BrandMapper extends BaseMapper<Brand, BrandResponse, BrandRequest> {
 
-    public static Brand toEntity(BrandRequest request) {
-        return Brand.builder()
-                .name(request.name())
-                .imageUrl(request.imageUrl())
-                .isFeature(request.isFeature())
-                .build();
-    }
+    BrandResponse fromEntityWithProductCount(Brand entity, int countProduct);
 
-    public static BrandResponse fromEntity(Brand entity) {
-        return null;
-    }
+    BrandResponse fromEntityOutCategory(Brand entity);
 }

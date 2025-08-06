@@ -1,25 +1,8 @@
 
-version: "3.8"
 name: 'e-ccommerce-API'
 services:
-  product-db:
-    image: mysql:8.0
-    container_name: product-db
-    environment:
-      MYSQL_ROOT_PASSWORD: 654321
-      MYSQL_DATABASE: product
-      MySQL_USERNAME: root
-      MYSQL_PASSWORD: root
-    ports:
-      - "33065:3306"
-    healthcheck: 
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-  
   product-service:
-    image: alrussydev/e-ccommerce-product_service
+    image: alruusydev/e-ccommerce-product_service
     container_name: product-service
     depends_on:
       product-db:
@@ -30,10 +13,96 @@ services:
       MYSQL_USERNAME: root
       MYSQL_PASSWORD: 654321
     ports:
-      - "9091:9091"
+      - "9191:9191"
     restart: unless-stopped
     deploy:
       restart_policy:
         condition: on-failure
         max_attempts: 3
-   
+        
+  order-service:
+    image: alruusydev/e-ccommerce-order_service
+    container_name: order-service
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      PRODUCT-SERVICE_URL: http://product-service:9191
+      SPRING_KAFKA_BOOTSTRAPSERVRERS: broker:9092
+      SPRING_KAFKA_CONSUMER_GROUB-ID: order-query-v1
+      MONGO_INITDB_ROOT_HOST: order-db
+      MONGO_INITDB_ROOT_PORT: 27017
+      MONGO_INITDB_ROOT_USERNAME: alrussy	
+      MONGO_INITDB_ROOT_PASSWORD: alrussy
+      MONGO_AUTHENTICATION_ADMIN: admin
+      MONGO_INITDB_NAME: order-db
+      
+    ports:
+      - "9192:9192"
+    restart: unless-stopped
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+        
+  product-db:
+   image:  mysql:8.0
+   container_name: product-db
+   environment:
+      MYSQL_ROOT_PASSWORD: 654321
+      MYSQL_DATABASE: product
+      MySQL_USERNAME: root
+      MYSQL_PASSWORD: root
+   ports:
+     - "33065:3306"
+   healthcheck: 
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+ 
+ 
+  order-db:
+    image: mongo
+    container_name: order-db
+    restart: always
+    ports:
+     - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: alrussy
+      MONGO_INITDB_ROOT_PASSWORD: alrussy
+  
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: alrussy
+      ME_CONFIG_MONGODB_ADMINPASSWORD: alrussy
+      ME_CONFIG_MONGODB_SERVER: order-db
+      ME_CONFIG_BASICAUTH: false
+      
+  zookeeper:
+    image: confluentinc/cp-zookeeper
+    container_name: zookeeper
+    ports:
+      -  2181:2181
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+  
+  broker:
+    image: confluentinc/cp-kafka
+    container_name: broker
+    hostname: broker
+    depends_on:
+      - zookeeper    
+    ports:
+      - "9093:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      ALLOW_PLAINTEXT_LISTENER: yes

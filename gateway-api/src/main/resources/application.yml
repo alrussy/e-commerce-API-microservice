@@ -1,0 +1,73 @@
+server:
+  port: 9190
+  shutdown: graceful
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+spring:
+ application:
+  name:  gateway_service
+ cloud:
+    gateway:
+        discovery:
+            locator:
+                enabled: true
+#        globalcors:
+#            corsConfigurations:
+#               '[/**]':
+#                      allowedOrigins: "http://localhost:5173"
+#                      allowedMethods: GET,POST
+#                      allowedHeaders: "*"
+#                      allowCredentials: true
+                      
+                   
+        routes:
+            - id: product-service                           
+              uri: ${PRODUCT_SERVICE_URI:http://localhost:9191}
+              predicates:
+                - Path=/product/**
+              filters:
+                - RewritePath=/product/?(?<segments>.*), /${segments}
+          
+            - id: order-service
+              uri: ${ORDER_SERVICE_URI:http://localhost:9192}
+              predicates:
+                - Path=/order/**
+              filters:
+                - RewritePath=/order/?(?<segments>.*), /${segments}
+            - id: inventory-service
+              uri: ${ORDER_SERVICE_URI:http://localhost:9193}
+              predicates:
+                - Path=/inventory/**
+              filters:
+                - RewritePath=/inventory/?(?<segments>.*), /${segments}
+            - id: notification-service
+              uri: ${ORDER_SERVICE_URI:http://localhost:9194}
+              predicates:
+                - Path=/notification/**
+              filters:
+                - RewritePath=/notification/?(?<segments>.*), /${segments}
+                
+            - id: openai
+              uri: ${OPENAI_SERVICE_URI:http://localhost:${server.port}}
+              predicates:
+                - Path=/v3/api-docs/**
+              filters:
+                - RewritePath=/v3/api-docs/?(?<segments>.*), /${segments}/v3/api-docs
+                
+   
+ mvc:
+  problemdetails:
+    enabled: true
+ security:
+   oauth2:
+     resourceserver:
+        jwt:
+          jwkSetUri: http://localhost:7080/realms/alrussy-ecommerce/protocol/openid-connect/certs
+springdoc:
+   swagger-ui:
+      use-root-path: true
+

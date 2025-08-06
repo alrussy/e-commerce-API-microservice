@@ -10,14 +10,6 @@ public interface BaseSkuProductService extends BaseService<String, SkuProductRes
 
     Page<SkuProductResponse> findByIsPrimary(Integer pageNumber, Integer pageSize);
 
-    Page<SkuProductResponse> findByIsPrimaryAndIsFeature(Integer pageNumber, Integer pageSize);
-
-    /**
-     * filter skuProducts by product and detailsValues
-     * @param productId
-     * @param values
-     * @return List
-     */
     List<SkuProductResponse> findByValueDetails(Long productId, List<String> values);
 
     List<SkuProductResponse> findByIds(List<String> skuCodes);
@@ -26,11 +18,11 @@ public interface BaseSkuProductService extends BaseService<String, SkuProductRes
 
     List<SkuProductResponse> findByCategoryId(Long categoryId);
 
-    Map<Object, List<SkuProductResponse>> findByDepartmentIds(List<Long> departmentIds);
-
-    List<SkuProductResponse> findByDepartmentId(Long departmentId);
-
     Map<Object, List<SkuProductResponse>> findByBrandIds(List<Long> brandIds);
 
     List<SkuProductResponse> findByBrandId(Long brandId);
+
+    Map<Object, List<SkuProductResponse>> findByDepartmentIds(List<Long> departmentIds);
+
+    List<SkuProductResponse> findByDepartmentId(Long departmentId);
 }

@@ -13,7 +13,9 @@ import jakarta.persistence.PostLoad;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,7 +23,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import product_app.model.dto.sku_product_dto.SkuProductResponse;
+import product_app.model.entities.table.DetailsOfSku;
 
 @Getter
 @Setter
@@ -52,9 +54,8 @@ public class SkuProduct extends Audition {
     @Transient
     private Double priceAfterDiscount;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @Builder.Default
-    private List<Details> details = new ArrayList();
+    @OneToMany(mappedBy = "skuProduct", cascade = CascadeType.ALL)
+    private Set<DetailsOfSku> details = new HashSet<>();
 
     public void addImage(String filename) {
         imageUrls.add(filename);
@@ -64,17 +65,17 @@ public class SkuProduct extends Audition {
         imageUrls.remove(filename);
     }
 
-    public void addDetail(Details detail) {
-        details.add(detail);
+    public void addDetail(DetailsOfSku detail) {
+        this.details.add(detail);
     }
 
-    public void addDetail(List<Details> details) {
+    public void addDetail(List<DetailsOfSku> details) {
 
-        details.addAll(details);
+        this.details.addAll(details);
     }
 
-    public void removeDetail(Details detail) {
-        details.remove(detail);
+    public void removeDetail(DetailsOfSku detail) {
+        this.details.remove(detail);
     }
 
     @PostLoad
@@ -86,31 +87,5 @@ public class SkuProduct extends Audition {
             discount = 0.0;
         }
         priceAfterDiscount = price - price * discount / 100;
-    }
-
-    public SkuProductResponse mapToSkuProductResponseWithPrduct() {
-        System.out.println(details.toString());
-        return SkuProductResponse.builder()
-                .skuCode(skuCode)
-                .product(product.mapToproductResponseWithCategoryBrandAndDepartment())
-                .details(details)
-                .imageUrls(imageUrls)
-                .priceAfterDiscount(priceAfterDiscount)
-                .price(price)
-                .discount(discount)
-                .currency(currency)
-                .build();
-    }
-
-    public SkuProductResponse mapToSkuProductResponseOutPrduct() {
-        return SkuProductResponse.builder()
-                .skuCode(skuCode)
-                .details(details)
-                .imageUrls(imageUrls)
-                .price(price)
-                .discount(discount)
-                .currency(currency)
-                .priceAfterDiscount(priceAfterDiscount)
-                .build();
     }
 }

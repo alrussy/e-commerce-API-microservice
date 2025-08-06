@@ -1,6 +1,7 @@
 package product_app.model.entities;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
@@ -18,7 +19,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import product_app.model.dto.brand_dto.BrandResponse;
 import product_app.model.entities.table.BrandCategory;
 
 @Getter
@@ -32,12 +32,13 @@ import product_app.model.entities.table.BrandCategory;
 public class Brand extends Audition {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String name;
+
     private String imageUrl;
-    private Boolean isFeature;
 
     @OneToMany(mappedBy = "brand", targetEntity = BrandCategory.class, cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
@@ -49,25 +50,5 @@ public class Brand extends Audition {
 
     public void addAllCategory(List<BrandCategory> categories) {
         brandCategory.addAll(categories);
-    }
-
-    public BrandResponse mapToBrandResponseWithCategory() {
-        return new BrandResponse(
-                id,
-                name,
-                imageUrl,
-                isFeature,
-                null,
-                brandCategory.stream()
-                        .map(category -> category.getCategory().mapToCategoryResponseOutDetailsNameAndBrand())
-                        .toList());
-    }
-
-    public BrandResponse mapToBrandResponseOutCategory() {
-        return new BrandResponse(id, name, imageUrl, isFeature, null, null);
-    }
-
-    public BrandResponse mapToBrandResponseWithProductCount(int count) {
-        return new BrandResponse(id, name, imageUrl, isFeature, count, null);
     }
 }

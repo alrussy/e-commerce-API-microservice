@@ -10,13 +10,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import product_app.mapper.PageMapper;
+import org.springframework.transaction.annotation.Transactional;
 import product_app.mapper.SkuProductMapper;
+import product_app.mapper.impls.PageMapper;
 import product_app.model.dto.PagedResult;
 import product_app.model.dto.sku_product_dto.SkuProductRequest;
 import product_app.model.dto.sku_product_dto.SkuProductResponse;
-import product_app.model.entities.Details;
 import product_app.model.entities.SkuProduct;
+import product_app.model.entities.id.ValueDetailsProductId;
+import product_app.model.entities.table.DetailsOfSku;
+import product_app.model.entities.table.ValueDetailsAndProduct;
 import product_app.repository.SkuProductRepository;
 import product_app.service.BaseSkuProductService;
 
@@ -26,36 +29,28 @@ import product_app.service.BaseSkuProductService;
 public class SkuProductServiceImpl implements BaseSkuProductService {
 
     private final SkuProductRepository skuProductRepository;
-    // private final WebClient client;
+    private final SkuProductMapper skuProductMapper;
 
     @Override
     public PagedResult<SkuProductResponse> findAll(int pageNumber) {
-        var page = PageRequest.of(pageNumber, 10);
+
+        var page = PageRequest.of(pageNumber <= 1 ? 0 : pageNumber - 1, 10);
 
         return new PageMapper<SkuProductResponse>()
-                .toPageResponse(skuProductRepository.findAll(page).map(brand -> SkuProductMapper.fromEntity(brand)));
+                .toPageResponse(skuProductRepository.findAll(page).map(sku -> skuProductMapper.fromEntity(sku)));
     }
 
-    public Map<Object, List<Details>> getAllDetailsByProductId(Long productId) {
+    public List<?> getAllDetailsByProductId(Long productId) {
         List<SkuProductResponse> skuProducts = findByProduct(productId);
-        return skuProducts.stream()
-                .flatMap(t -> t.getDetails().stream().map(x -> x))
-                .collect(Collectors.groupingBy(m -> m.getName()));
+
+        return skuProducts.stream().map(t -> t.details()).toList();
     }
 
     @Override
     public Page<SkuProductResponse> findByIsPrimary(Integer pageNumber, Integer pageSize) {
         Page<SkuProductResponse> skuProductsPage = skuProductRepository
                 .findAllByIsPrimary(PageRequest.of(pageNumber, pageSize), true)
-                .map(t -> t.mapToSkuProductResponseWithPrduct());
-        return skuProductsPage;
-    }
-
-    @Override
-    public Page<SkuProductResponse> findByIsPrimaryAndIsFeature(Integer pageNumber, Integer pageSize) {
-        Page<SkuProductResponse> skuProductsPage = skuProductRepository
-                .findAllByProductIsFeatureAndIsPrimary(PageRequest.of(pageNumber, pageSize), true, true)
-                .map(t -> t.mapToSkuProductResponseWithPrduct());
+                .map(skuProductMapper::fromEntity);
         return skuProductsPage;
     }
 
@@ -65,10 +60,7 @@ public class SkuProductServiceImpl implements BaseSkuProductService {
         int i = 0;
         List<SkuProductResponse> filter = new ArrayList<>();
         while (i < skuProducts.size()) {
-            if (skuProducts.get(i).getDetails().stream()
-                    .map(t -> t.getValue())
-                    .toList()
-                    .containsAll(values)) {
+            if (skuProducts.get(i).details().values().containsAll(values)) {
                 filter.add(skuProducts.get(i));
             }
             i++;
@@ -78,30 +70,28 @@ public class SkuProductServiceImpl implements BaseSkuProductService {
 
     @Override
     public SkuProductResponse findById(String skuCode) {
-        return skuProductRepository
-                .findBySkuCode(skuCode)
-                .orElseThrow(() -> new EntityNotFoundException(skuCode))
-                .mapToSkuProductResponseWithPrduct();
+        return skuProductMapper.fromEntity(
+                skuProductRepository.findBySkuCode(skuCode).orElseThrow(() -> new EntityNotFoundException(skuCode)));
     }
 
     @Override
     public List<SkuProductResponse> findByIds(List<String> skuCodes) {
         return skuProductRepository.findBySkuCodeIn(skuCodes).stream()
-                .map(skuProduct -> skuProduct.mapToSkuProductResponseWithPrduct())
+                .map(skuProductMapper::fromEntity)
                 .toList();
     }
 
     @Override
     public List<SkuProductResponse> findByProduct(Long productId) {
         return skuProductRepository.findByProductIdProductId(productId).stream()
-                .map(SkuProduct::mapToSkuProductResponseWithPrduct)
+                .map(skuProductMapper::fromEntity)
                 .toList();
     }
 
     @Override
     public List<SkuProductResponse> findByCategoryId(Long categoryId) {
         return skuProductRepository.findByProductIdCategoryId(categoryId).stream()
-                .map(skuProduct -> skuProduct.mapToSkuProductResponseOutPrduct())
+                .map(skuProductMapper::fromEntityOutPrduct)
                 .toList();
     }
 
@@ -110,20 +100,20 @@ public class SkuProductServiceImpl implements BaseSkuProductService {
         List<SkuProductResponse> sResponse = new ArrayList<>();
         departmentIds.stream().forEach(t -> {
             var skuProducts =
-                    skuProductRepository.findFirst5ByProductDepartmentIdDepartmentIdAndIsPrimary(t, true).stream()
-                            .map(skuProduct -> skuProduct.mapToSkuProductResponseWithPrduct())
+                    skuProductRepository.findFirst5ByProductDepartmentDepartmentIdAndIsPrimary(t, true).stream()
+                            .map(skuProductMapper::fromEntity)
                             .toList();
             sResponse.addAll(skuProducts);
         });
         return sResponse.stream()
-                .collect(Collectors.groupingBy(t -> t.getProduct().department().name()));
+                .collect(Collectors.groupingBy(t -> t.product().department().name()));
     }
 
     @Override
     public List<SkuProductResponse> findByDepartmentId(Long departmentId) {
 
-        return skuProductRepository.findFirst5ByProductDepartmentIdDepartmentIdAndIsPrimary(departmentId, true).stream()
-                .map(SkuProduct::mapToSkuProductResponseWithPrduct)
+        return skuProductRepository.findFirst5ByProductDepartmentDepartmentIdAndIsPrimary(departmentId, true).stream()
+                .map(skuProductMapper::fromEntity)
                 .toList();
     }
 
@@ -132,28 +122,45 @@ public class SkuProductServiceImpl implements BaseSkuProductService {
         List<SkuProductResponse> sResponse = new ArrayList<>();
         brandIds.stream().forEach(t -> {
             var skuProducts = skuProductRepository.findFirst3ByProductBrandIdAndIsPrimary(t, true).stream()
-                    .map(skuProduct -> skuProduct.mapToSkuProductResponseOutPrduct())
+                    .map(skuProductMapper::fromEntityOutPrduct)
                     .toList();
             sResponse.addAll(skuProducts);
         });
         return sResponse.stream()
-                .collect(Collectors.groupingBy(t -> t.getProduct().brand().name()));
+                .collect(Collectors.groupingBy(t -> t.product().brand().name()));
     }
 
     @Override
     public List<SkuProductResponse> findByBrandId(Long brandId) {
 
         return skuProductRepository.findFirst3ByProductBrandIdAndIsPrimary(brandId, true).stream()
-                .map(SkuProduct::mapToSkuProductResponseWithPrduct)
+                .map(skuProductMapper::fromEntity)
                 .toList();
     }
 
     @Override
-    public SkuProductResponse save(SkuProductRequest skuProductRequest) {
+    @Transactional
+    public String save(SkuProductRequest skuProductRequest) {
         var isPrimary = !skuProductRepository.existsByProductIdProductId(skuProductRequest.productId());
-        return skuProductRepository
-                .save(SkuProductMapper.toEntity(skuProductRequest, isPrimary))
-                .mapToSkuProductResponseOutPrduct();
+        var sku = skuProductRepository.save(skuProductMapper.toEntity(skuProductRequest, isPrimary));
+
+        var skuDetails = skuProductRequest.details().stream()
+                .map(details -> DetailsOfSku.builder()
+                        .valueDetailsAndProduct(ValueDetailsAndProduct.builder()
+                                .id(ValueDetailsProductId.builder()
+                                        .name(details.name())
+                                        .value(details.value())
+                                        .productId(skuProductRequest.productId())
+                                        .categoryId(skuProductRequest.categoryId())
+                                        .build())
+                                .build())
+                        .skuProduct(sku)
+                        .build())
+                .collect(Collectors.toSet());
+
+        sku.setDetails(skuDetails);
+
+        return skuProductRepository.save(sku).getSkuCode();
     }
 
     @Override
@@ -184,10 +191,10 @@ public class SkuProductServiceImpl implements BaseSkuProductService {
             // List<Details> temp =
             // skuFind.getDetails().stream().collect(Collectors.toList());
             skuFind.getDetails().clear();
-            skuFind.setDetails(skuRequest.details());
+            // skuFind.setDetails(skuRequest.details());
         }
 
-        return skuProductRepository.save(skuFind).mapToSkuProductResponseWithPrduct();
+        return skuProductMapper.fromEntity(skuProductRepository.save(skuFind));
     }
 
     @Override
@@ -201,12 +208,12 @@ public class SkuProductServiceImpl implements BaseSkuProductService {
         switch (typeAction) {
             case 0: {
                 skuproduct.removeImage(url);
-                return skuProductRepository.save(skuproduct).mapToSkuProductResponseWithPrduct();
+                return skuProductMapper.fromEntity(skuProductRepository.save(skuproduct));
             }
 
             case 1: {
                 skuproduct.addImage(url);
-                return skuProductRepository.save(skuproduct).mapToSkuProductResponseWithPrduct();
+                return skuProductMapper.fromEntity(skuProductRepository.save(skuproduct));
             }
             default:
                 throw new IllegalArgumentException("typeAction mustbe not equale :" + typeAction
