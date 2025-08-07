@@ -69,9 +69,6 @@ public class OrderEventService {
             topics = "${orders.topic-event-handler}",
             groupId = "order-aggregate",
             containerFactory = "kafkaListenerContainerFactory")
-    
-    
-    
     public void handle(EventRequest event) {
         Instant createdAt = Instant.now();
         OrderEvent newEvent;

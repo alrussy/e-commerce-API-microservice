@@ -54,7 +54,7 @@ public class kafkaConfig {
     }
 
     @Bean
-     JsonMessageConverter converter() {
+    JsonMessageConverter converter() {
         return new JsonMessageConverter();
     }
 

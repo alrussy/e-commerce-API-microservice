@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -18,8 +17,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Checkout {
 
-	@Id
-	private String id;
+    @Id
+    private String id;
+
     private Long addressId;
     private Double discount;
     private Double shippingFee;

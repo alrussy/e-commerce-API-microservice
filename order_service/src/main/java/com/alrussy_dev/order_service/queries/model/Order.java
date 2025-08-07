@@ -30,6 +30,6 @@ public class Order {
 
     @NotBlank
     private EventType status;
-    
+
     private Checkout checkout;
 }

@@ -7,7 +7,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import org.springframework.data.annotation.Id;
 
 @Getter
@@ -17,8 +16,8 @@ import org.springframework.data.annotation.Id;
 @Builder
 public class LineProduct {
 
-	@Id
-	private String  id;
+    @Id
+    private String id;
 
     @NotBlank
     private String skuCode;

@@ -17,14 +17,13 @@ public class OrderCancelledEvent extends EventRequest implements Serializable {
     private static final long serialVersionUID = 3L;
 
     public OrderCancelledEvent(String eventId, String orderNumber, Order paylod, String reason) {
-    	
+
         super(eventId, orderNumber);
-        
+
         this.paylod = paylod;
-        this.reason=reason;
+        this.reason = reason;
     }
 
- 
     private Order paylod;
 
     private String reason;

@@ -39,7 +39,6 @@ public class SwaggerConfig {
                             new AbstractSwaggerUiConfigProperties.SwaggerUrl(
                                     serviceName, DEFAULT_API_DOCS_URL + "/" + serviceName, null);
                     swaggerUrls.add(swaggerUrl);
-                    
                 });
         System.out.println(swaggerUrls);
         swaggerProperties.setUrls(swaggerUrls);
