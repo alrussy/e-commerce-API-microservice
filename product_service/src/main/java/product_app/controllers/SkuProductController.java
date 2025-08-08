@@ -41,8 +41,8 @@ public class SkuProductController {
     }
 
     @GetMapping("/primary/page")
-    public ResponseEntity<Page<SkuProductResponse>> findByIsPrimaryPageable(
-            @RequestParam("pageNumber") int pageNumber, @RequestParam("pageSize") int pageSize) {
+    public ResponseEntity<PagedResult<SkuProductResponse>> findByIsPrimaryPageable(
+            @RequestParam(name="pageNumber",defaultValue="1") int pageNumber, @RequestParam(defaultValue = "10") int pageSize) {
         return ResponseEntity.ok(skuProductService.findByIsPrimary(pageNumber, pageSize));
     }
 

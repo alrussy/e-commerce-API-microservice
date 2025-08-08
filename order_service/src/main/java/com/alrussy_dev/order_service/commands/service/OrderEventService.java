@@ -51,7 +51,7 @@ public class OrderEventService {
         order.setUserId("USER199");
         order.setStatus(EventType.NEW);
         order.setCreatedAt(createdAt);
-        // createdValidator.validate(order);
+        createdValidator.validate(order);
         var event = OrderEvent.builder()
                 .orderNumber(orderNumber)
                 .eventType(EventType.CREATED)

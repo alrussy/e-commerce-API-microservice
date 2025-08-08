@@ -47,11 +47,13 @@ public class SkuProductServiceImpl implements BaseSkuProductService {
     }
 
     @Override
-    public Page<SkuProductResponse> findByIsPrimary(Integer pageNumber, Integer pageSize) {
-        Page<SkuProductResponse> skuProductsPage = skuProductRepository
-                .findAllByIsPrimary(PageRequest.of(pageNumber, pageSize), true)
-                .map(skuProductMapper::fromEntity);
-        return skuProductsPage;
+    public PagedResult<SkuProductResponse> findByIsPrimary(Integer pageNumber, Integer pageSize) {
+        var page = PageRequest.of(pageNumber <= 1 ? 0 : pageNumber - 1, 10);
+
+     
+   	 return new PageMapper<SkuProductResponse>()
+             .toPageResponse(skuProductRepository.findAllByIsPrimary(page, true).map(skuProductMapper::fromEntity));
+
     }
 
     @Override
