@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,10 +49,9 @@ public class SkuProductServiceImpl implements BaseSkuProductService {
     public PagedResult<SkuProductResponse> findByIsPrimary(Integer pageNumber, Integer pageSize) {
         var page = PageRequest.of(pageNumber <= 1 ? 0 : pageNumber - 1, 10);
 
-     
-   	 return new PageMapper<SkuProductResponse>()
-             .toPageResponse(skuProductRepository.findAllByIsPrimary(page, true).map(skuProductMapper::fromEntity));
-
+        return new PageMapper<SkuProductResponse>()
+                .toPageResponse(
+                        skuProductRepository.findAllByIsPrimary(page, true).map(skuProductMapper::fromEntity));
     }
 
     @Override

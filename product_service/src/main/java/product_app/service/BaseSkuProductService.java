@@ -2,7 +2,6 @@ package product_app.service;
 
 import java.util.List;
 import java.util.Map;
-
 import product_app.model.dto.PagedResult;
 import product_app.model.dto.sku_product_dto.SkuProductRequest;
 import product_app.model.dto.sku_product_dto.SkuProductResponse;

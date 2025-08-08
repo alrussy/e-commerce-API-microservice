@@ -7,7 +7,7 @@ import product_app.model.dto.product_dto.ProductResponse;
 public record SkuProductResponse(
         String skuCode,
         ProductResponse product,
-        Map<String,String> details,
+        Map<String, String> details,
         List<String> imageUrls,
         Double price,
         Double discount,

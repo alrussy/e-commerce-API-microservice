@@ -5,7 +5,6 @@ import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -42,7 +41,8 @@ public class SkuProductController {
 
     @GetMapping("/primary/page")
     public ResponseEntity<PagedResult<SkuProductResponse>> findByIsPrimaryPageable(
-            @RequestParam(name="pageNumber",defaultValue="1") int pageNumber, @RequestParam(defaultValue = "10") int pageSize) {
+            @RequestParam(name = "pageNumber", defaultValue = "1") int pageNumber,
+            @RequestParam(defaultValue = "10") int pageSize) {
         return ResponseEntity.ok(skuProductService.findByIsPrimary(pageNumber, pageSize));
     }
 
