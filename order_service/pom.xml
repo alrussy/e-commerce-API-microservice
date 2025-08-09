@@ -12,7 +12,7 @@
   <artifactId>order_service</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>order_service</name>
-  <description>order_service is management all product for Spring Boot</description>
+  <description>order_service is management order for Spring Boot</description>
   <url />
   <licenses>
     <license />
@@ -42,9 +42,9 @@
         <scope>import</scope>
       </dependency>
     </dependencies>
-
   </dependencyManagement>
-  <dependencies>
+    <dependencies>
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
@@ -139,11 +139,7 @@
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
     </dependency>
-    <dependency>
-      <groupId>com.alrussy_dev</groupId>
-      <artifactId>eccomerce_api</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-    </dependency>
+  
   </dependencies>
   <build>
     <plugins>
@@ -174,12 +170,6 @@
             <java.version>${java.version}</java.version>
             <project.version>${project.version}</project.version>
           </additionalProperties>
-          <excludes>
-            <exclude>
-              <groupId>org.projectlombok</groupId>
-              <artifactId>lombok</artifactId>
-            </exclude>
-          </excludes>
           <excludes>
             <exclude>
               <groupId>org.projectlombok</groupId>
@@ -225,8 +215,7 @@
         <configuration>
           <java>
             <!-- orders of used formatters are important MPOM-376 -->
-            <!-- eg. palantir override importOrder, so should be
-						first -->
+            <!-- eg. palantir override importOrder, so should be first -->
             <palantirJavaFormat />
             <removeUnusedImports />
             <importOrder />
@@ -235,8 +224,7 @@
           <pom>
             <sortPom>
               <expandEmptyElements>false</expandEmptyElements>
-              <!--
-							https://issues.apache.org/jira/browse/MRELEASE-1111 -->
+              <!-- https://issues.apache.org/jira/browse/MRELEASE-1111 -->
               <spaceBeforeCloseEmptyElement>true</spaceBeforeCloseEmptyElement>
             </sortPom>
           </pom>
