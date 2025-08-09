@@ -30,7 +30,7 @@ public class ProductService {
     @CircuitBreaker(name = "product-service", fallbackMethod = "fallbackMethod")
     public SkuProduct getProduct(String skuCode) {
 
-    	System.out.println(skuCode);
+        System.out.println(skuCode);
         return client.get()
                 .uri("/sku/{skuCode}", skuCode)
                 .retrieve()
