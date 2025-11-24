@@ -1,8 +1,7 @@
 package com.alrussy_dev.order_service.config;
 
 import com.alrussy_dev.order_service.ApplicationProperties;
-import com.alrussy_dev.order_service.commands.model.EventRequest;
-import com.alrussy_dev.order_service.queries.model.Order;
+import com.alrussy_dev.order_service.Event;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.kafka.clients.admin.NewTopic;
@@ -31,65 +30,40 @@ public class KafkaConfiguration {
     NewTopics topic() {
         return new NewTopics(
                 new NewTopic(properties.topicEventHandler(), 1, (short) 1),
-                new NewTopic(properties.topicOrderNew(), 1, (short) 1),
-                new NewTopic(properties.topicOrderCreated(), 1, (short) 1),
-                new NewTopic(properties.topicOrderShipped(), 1, (short) 1),
-                new NewTopic(properties.topicOrderProcessed(), 1, (short) 1),
-                new NewTopic(properties.topicOrderDelivered(), 1, (short) 1),
+                new NewTopic(properties.topicShippedOrder(), 1, (short) 1),
+                new NewTopic(properties.topicDeliveredOrder(), 1, (short) 1),
+                new NewTopic(properties.topicConfirmedOrder(), 1, (short) 1),
                 new NewTopic(properties.topicOrderCancelled(), 1, (short) 1),
                 new NewTopic(properties.topicOrderError(), 1, (short) 1),
+                new NewTopic(properties.topicOpenedNewCart(), 1, (short) 1),
+                new NewTopic(properties.topicAddedProductToCart(), 1, (short) 1),
+                new NewTopic(properties.topicRemovedProductFromCart(), 1, (short) 1),
+                new NewTopic(properties.topicChangedQuantity(), 1, (short) 1),
+                new NewTopic(properties.topicStartedCheckout(), 1, (short) 1),
+                new NewTopic(properties.topicCreatedOrder(), 1, (short) 1),
                 new NewTopic("", 1, (short) 1));
     }
 
     @Bean
-    ConsumerFactory<String, EventRequest> kafkaConsumerFactory() {
+    ConsumerFactory<String, Event> kafkaConsumerFactory2() {
         String bootstrapServers = "localhost:9092";
-
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-        props.put(JsonDeserializer.USE_TYPE_INFO_HEADERS, false);
         props.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
-        props.put(
-                JsonDeserializer.VALUE_DEFAULT_TYPE,
-                "com.alrussy_dev.order_service.commands.model.OrderProcessedEvent");
-        props.put(
-                JsonDeserializer.TYPE_MAPPINGS,
-                "event:com.alrussy_dev.order_service.commands.model.EventRequest,even-processed:com.alrussy_dev.order_service.commands.model.OrderProcessedEvent");
+        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
+        props.put(JsonDeserializer.VALUE_DEFAULT_TYPE, "com.alrussy_dev.order_service.Event");
+        props.put(JsonDeserializer.TYPE_MAPPINGS, "order:com.alrussy_dev.order_service.Event");
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
         props.put(ErrorHandlingDeserializer.KEY_DESERIALIZER_CLASS, StringDeserializer.class);
         props.put(ErrorHandlingDeserializer.VALUE_DESERIALIZER_CLASS, JsonDeserializer.class.getName());
 
-        return new DefaultKafkaConsumerFactory<>(props, null, new JsonDeserializer<>(EventRequest.class));
-    }
-
-    @Bean
-    ConsumerFactory<String, Order> kafkaConsumerFactory2() {
-        String bootstrapServers = "localhost:9092";
-        Map<String, Object> props = new HashMap<>();
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-        props.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
-        props.put(JsonDeserializer.VALUE_DEFAULT_TYPE, "com.alrussy_dev.order_service.queries.model.Order");
-        props.put(JsonDeserializer.TYPE_MAPPINGS, "order:com.alrussy_dev.order_service.queries.model.Order");
-        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
-        props.put(ErrorHandlingDeserializer.KEY_DESERIALIZER_CLASS, StringDeserializer.class);
-        props.put(ErrorHandlingDeserializer.VALUE_DESERIALIZER_CLASS, JsonDeserializer.class.getName());
-
-        return new DefaultKafkaConsumerFactory<>(props, null, new JsonDeserializer<>(Order.class));
-    }
-
-    @Bean
-    KafkaListenerContainerFactory<?> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, EventRequest> factory =
-                new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(kafkaConsumerFactory());
-        return factory;
+        return new DefaultKafkaConsumerFactory<>(props, null, new JsonDeserializer<>(Event.class));
     }
 
     @Bean
     KafkaListenerContainerFactory<?> kafkaListenerContainerFactory2() {
-        ConcurrentKafkaListenerContainerFactory<String, Order> factory =
+        ConcurrentKafkaListenerContainerFactory<String, Event> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(kafkaConsumerFactory2());
         factory.setRecordMessageConverter(new JsonMessageConverter());

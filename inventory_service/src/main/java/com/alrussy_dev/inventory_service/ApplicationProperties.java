@@ -4,4 +4,12 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "inventory")
 public record ApplicationProperties(
-        String orderServiceUrl, String topicOrderEventHandelr, String topicOrderCreated, String topicOrderCancelled) {}
+        String productServiceUrl,
+        String orderServiceUrl,
+        String openingStockTopic,
+        String createdOrderTopic,
+        String CancelledOrderTopic,
+        String cancelledInvoiceTopic,
+        String updatedInvoiceTopic,
+        String receivedInvoiceTopic,
+        String pendedInvoiceTopic) {}

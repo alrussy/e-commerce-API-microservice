@@ -22,8 +22,12 @@ public class LineProduct {
 
     private Integer quantity;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "actionId", updatable = false, insertable = false)
     private ActionInventory action;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "skuCode", updatable = false, insertable = false)
+    private Inventory inventory;
 }

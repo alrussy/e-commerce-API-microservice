@@ -19,6 +19,6 @@ public class ActionPublishingJop {
     @SchedulerLock(name = "scheduledTask", lockAtLeastFor = "PT30S", lockAtMostFor = "PT1M")
     public void publishAllOrderEvents() {
         log.info("Publishing Events at {}", Instant.now());
-        inventoryService.eventPublishing();
+        //        inventoryService.eventPublishing();
     }
 }

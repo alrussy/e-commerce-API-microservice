@@ -18,4 +18,6 @@ public interface ActionInventoryRepository extends JpaRepository<ActionInventory
     List<ActionInventory> findByIsProcessedAndIsPublished(boolean isProcessed, boolean isPublished, Sort descending);
 
     List<ActionInventory> findByLineProductsIdSkuCode(String skuCode);
+
+    List<ActionInventory> findByLineProductsIdSkuCodeIn(List<String> skuCodes);
 }

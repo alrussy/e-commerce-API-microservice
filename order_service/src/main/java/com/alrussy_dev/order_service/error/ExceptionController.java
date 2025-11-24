@@ -44,6 +44,13 @@ public class ExceptionController {
         return createExceptionMessage(e.getMessage(), HttpStatus.BAD_REQUEST, webRequest);
     }
 
+    @ExceptionHandler(CommandException.class)
+    @ResponseStatus(code = HttpStatus.EXPECTATION_FAILED)
+    public Map<String, Object> handleOtherExptiton(CommandException e, WebRequest webRequest) {
+
+        return createExceptionMessage(e.getMessage(), HttpStatus.EXPECTATION_FAILED, webRequest);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     public Map<String, Object> handleMethodArgumentNotValidExecption(

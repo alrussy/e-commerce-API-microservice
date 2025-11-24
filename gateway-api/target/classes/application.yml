@@ -15,41 +15,48 @@ spring:
         discovery:
             locator:
                 enabled: true
-#        globalcors:
-#            corsConfigurations:
-#               '[/**]':
-#                      allowedOrigins: "http://localhost:5173"
-#                      allowedMethods: GET,POST
-#                      allowedHeaders: "*"
-#                      allowCredentials: true
-                      
-                   
         routes:
             - id: product-service                           
               uri: ${PRODUCT_SERVICE_URI:http://localhost:9191}
               predicates:
-                - Path=/product/**
+                - Path=/api/v1/products/**
               filters:
-                - RewritePath=/product/?(?<segments>.*), /${segments}
-          
+                - RewritePath=/api/v1/?(?<segments>.*), /$\{segments}
+                - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+#                - AddRequestHeadersIfNotPresent=X-USER-NAME-1:user1
+
             - id: order-service
               uri: ${ORDER_SERVICE_URI:http://localhost:9192}
               predicates:
-                - Path=/order/**
+                - Path=/api/v1/orders/**
               filters:
-                - RewritePath=/order/?(?<segments>.*), /${segments}
+                - RewritePath=/api/v1/?(?<segments>.*), /$\{segments}
+                - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+
             - id: inventory-service
-              uri: ${ORDER_SERVICE_URI:http://localhost:9193}
+              uri: ${INVENTORY_SERVICE_URI:http://localhost:9193}
               predicates:
-                - Path=/inventory/**
+                - Path=/api/v1/inventory/**
               filters:
-                - RewritePath=/inventory/?(?<segments>.*), /${segments}
+                - RewritePath=/api/v1/?(?<segments>.*), /${segments}
+                - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+            
+            - id: customer-service
+              uri: ${CUSTOMER_SERVICE_URI:http://localhost:9199}
+              predicates:
+               - Path=/api/v1/customer/**
+              filters:
+               - RewritePath=/api/v1/?(?<segments>.*), /${segments}
+               - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+
             - id: notification-service
-              uri: ${ORDER_SERVICE_URI:http://localhost:9194}
+              uri: ${NOTIFICATION_SERVICE_URI:http://localhost:9194}
               predicates:
-                - Path=/notification/**
+                - Path=/api/v1/notification/**
               filters:
-                - RewritePath=/notification/?(?<segments>.*), /${segments}
+                - RewritePath=/api/v1/notification/?(?<segments>.*), /${segments}
+                - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+
                 
             - id: openai
               uri: ${OPENAI_SERVICE_URI:http://localhost:${server.port}}
@@ -57,6 +64,8 @@ spring:
                 - Path=/v3/api-docs/**
               filters:
                 - RewritePath=/v3/api-docs/?(?<segments>.*), /${segments}/v3/api-docs
+                - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+
                 
    
  mvc:

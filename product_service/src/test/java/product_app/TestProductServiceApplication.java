@@ -2,6 +2,8 @@ package product_app;
 
 import org.springframework.boot.SpringApplication;
 
+import com.alrussy.product_service.ProductServiceApplication;
+
 public class TestProductServiceApplication {
 
     public static void main(String[] args) {

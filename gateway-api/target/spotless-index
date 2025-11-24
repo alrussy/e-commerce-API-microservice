@@ -1,6 +1,4 @@
 gsY+uD1AQWsQx424Pew1wfDYxhuKE9znTTae8vCGhuQ=
-pom.xml 2025-08-07T16:36:07.407990500Z
 src\main\java\com\alrussy_dev\gateway_api\GatewayServiceApplication.java 2025-08-07T16:36:06.661985800Z
-src\main\java\com\alrussy_dev\gateway_api\SecuriyConfig.java 2025-08-07T16:36:06.910989800Z
-src\main\java\com\alrussy_dev\gateway_api\SwaggerConfig.java 2025-08-07T16:36:07.071989400Z
+src\main\java\com\alrussy_dev\gateway_api\SwaggerConfig.java 2025-08-12T22:58:35.636242900Z
 src\test\java\com\alrussy_dev\gateway_service\GatewayServiceApplicationTests.java 2025-06-17T17:15:27.712792600Z

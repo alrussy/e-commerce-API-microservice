@@ -1,0 +1,122 @@
+package com.alrussy.file_service.service;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import javax.naming.spi.DirectoryManager;
+
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.util.StringUtils;
+import org.springframework.web.client.RestClient;
+import org.springframework.web.multipart.MultipartFile;
+
+import ch.qos.logback.core.rolling.helper.FileStoreUtil;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+
+@Service
+@Slf4j
+@RequiredArgsConstructor
+public class FileService {
+	
+	private final RestClient client;
+
+	@Value("${file.upload.base.url}")
+	private String baseUrl;
+	
+	public String uploadFile(String dir,MultipartFile file) throws IOException {
+		
+		 Path fileStorageLocation =Paths.get(baseUrl+File.separator+dir).toAbsolutePath().normalize();		
+		Files.createDirectories(fileStorageLocation);
+		
+		
+		String fileName=StringUtils.cleanPath(file.getOriginalFilename());
+		
+		if(fileName.contains("..")) {
+			throw new FileUploadException("file name contains ivalid path sequence " + fileName);
+		}
+		
+		Path targetLocation=fileStorageLocation.resolve(fileName);
+		
+		Files.copy(file.getInputStream(),targetLocation,StandardCopyOption.REPLACE_EXISTING);
+		//saveDataFile(dir,fileName);
+		//Files.delete(targetLocation);
+		log.info(targetLocation.toString());
+		return "/images/"+dir+"/"+fileName;
+	}
+	
+	public Resource getFile(String fileName,String dir) throws IOException {
+		
+		 Path fileStorageLocation =Paths.get(baseUrl+File.separator+dir).toAbsolutePath().normalize();	
+		 Path targetLocation=fileStorageLocation.resolve(fileName);
+		return new InputStreamResource(Files.newInputStream(targetLocation));
+		
+//		
+//		
+//		 List<Path> paths=new ArrayList<>();
+//		 
+//		 Files.list(fileStorageLocation)
+//				 .forEach(t -> {
+//
+//					 if(t.getFileName().toString().startsWith(imageName)) {
+//						resource = new InputStreamResource(Files.newInputStream(paths.get(0)));
+//						
+//						 paths.add(t);
+//						 log.info(t.toString());
+//					 };
+//					 
+//				 });
+		 
+		 
+		
+		
+	}
+
+	private void saveDataFile(String dir,String filename,String id) {
+	MultiValueMap<String, String> params=new LinkedMultiValueMap<String, String>();
+	
+	params.add("id",id);
+	params.add("url", "/api/files/images/"+dir+"/"+filename);
+	
+		switch (dir) {
+		case "product": {
+			client.put().uri( "/api/products/add-image", t ->t.queryParams(params).build() )
+			.retrieve()
+			.toBodilessEntity();
+			break;
+		}
+		case "category":{
+		client.put().uri( "/api/products/categories/add-image", t ->t.queryParams(params).build() ).retrieve().toBodilessEntity();
+			break;
+		}
+		case "brand":{
+		client.put().uri( "/api/products/brands/add-image", t ->t.queryParams(params).build() ).retrieve().toBodilessEntity();
+			break;
+		}
+		
+		default:
+			throw new IllegalArgumentException("the dir is not found value: " + dir);
+		}
+		
+		
+	}
+
+
+}

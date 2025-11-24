@@ -14,7 +14,7 @@ public class RestClientConfig {
 
     @Autowired
     ApplicationProperties properties;
-
+    // http://localhost:8080/auth/admin/realms/{real-name}/users?username=testUser
     @Bean
     @Qualifier("productClient")
     RestClient productClient() {
@@ -24,6 +24,19 @@ public class RestClientConfig {
 
         return RestClient.builder()
                 .baseUrl(properties.productServiceUrl() + "/api/products")
+                .requestFactory(simpleClientHttpRequestFactory)
+                .build();
+    }
+
+    @Bean
+    @Qualifier("keyclockClient")
+    RestClient keyClockClient() {
+        SimpleClientHttpRequestFactory simpleClientHttpRequestFactory = new SimpleClientHttpRequestFactory();
+        simpleClientHttpRequestFactory.setConnectTimeout(Duration.ofSeconds(5L));
+        simpleClientHttpRequestFactory.setReadTimeout(Duration.ofSeconds(5L));
+
+        return RestClient.builder()
+                .baseUrl(properties.keyclockServerUrl())
                 .requestFactory(simpleClientHttpRequestFactory)
                 .build();
     }

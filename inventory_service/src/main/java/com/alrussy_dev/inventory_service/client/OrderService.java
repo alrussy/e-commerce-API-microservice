@@ -1,6 +1,6 @@
 package com.alrussy_dev.inventory_service.client;
 
-import com.alrussy_dev.inventory_service.model.dto.EventRequest;
+import com.alrussy_dev.inventory_service.model.dto.Event;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -12,7 +12,7 @@ import org.springframework.web.client.RestClient;
 public class OrderService {
     private final RestClient client;
 
-    public String processesOrder(EventRequest event) throws JsonProcessingException {
+    public String processesOrder(Event event) throws JsonProcessingException {
         var response = client.post()
                 .uri("/add-event")
                 .body(event)

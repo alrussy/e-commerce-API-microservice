@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: customer-service
+#  config:
+#    import: "optional:configserver:http://localhost:9205"
+  datasource:
+    password: 654321
+    url: jdbc:mysql://localhost:33065/customer_service?createDatabaseIfNotExist=true
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  jackson:
+    default-property-inclusion: non-null
+  security:
+    oauth2:
+      resourceserver: 
+       jwt:
+         issuerUri: http://localhost:7080/realms/alrussy-ecommerce
+
+server:
+  port: 9199
+#  boot:
+#    admin:
+#      client:
+#        url:
+#        - http://localhost:9200
+#management:
+#  tracing:
+#    sampling:
+#      probability: 1.0
+#  endpoints:
+#    web:
+#      exposure:
+#        include:
+#        - "*"  
+#  info:
+#    env:
+#      enabled: true

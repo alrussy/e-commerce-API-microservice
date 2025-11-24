@@ -1,15 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.alrussy_dev</groupId>
-  <artifactId>eccomerce_api</artifactId>
-  <version>0.0.1-SNAPSHOT </version>
-  <url>http://maven.apache.org</url>
-  <packaging>pom</packaging>
-  <modules>
-    <module>gateway-api</module>
-    <module>notification_service</module>
-    <module>order_service</module>
-    <module>product_service</module>
-    <module>inventory_service</module>
-  </modules>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.alrussy_dev</groupId>
+	<artifactId>eccomerce_api</artifactId>
+	<version>0.0.1-SNAPSHOT </version>
+	<url>http://maven.apache.org</url>
+	<packaging>pom</packaging>
+	<modules>
+		<module>gateway-api</module>
+		<module>notification_service</module>
+		<module>order_service</module>
+		<module>product_service</module>
+		<module>inventory_service</module>
+		<module>customer-service</module>
+		<module>file-service</module>
+		<module>procurement_service</module>
+	</modules>
 </project>
