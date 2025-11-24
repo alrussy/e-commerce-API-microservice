@@ -1,5 +1,9 @@
 package com.alrussy.product_service.controllers;
 
+import com.alrussy.product_service.model.dto.PagedResult;
+import com.alrussy.product_service.model.dto.details_dto.NameDetailsRequest;
+import com.alrussy.product_service.model.dto.details_dto.NameDetailsResponse;
+import com.alrussy.product_service.service.BaseNameDetailsService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,11 +18,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.alrussy.product_service.model.dto.PagedResult;
-import com.alrussy.product_service.model.dto.details_dto.NameDetailsRequest;
-import com.alrussy.product_service.model.dto.details_dto.NameDetailsResponse;
-import com.alrussy.product_service.service.BaseNameDetailsService;
 
 @RestController
 @RequestMapping("/products/details")

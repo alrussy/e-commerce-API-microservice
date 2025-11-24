@@ -1,9 +1,8 @@
 package com.alrussy.product_service.service;
 
-import java.util.List;
-
 import com.alrussy.product_service.model.dto.department_dto.DepartmentRequest;
 import com.alrussy.product_service.model.dto.department_dto.DepartmentResponse;
+import java.util.List;
 
 public interface BaseDepartmentService extends BaseService<Long, DepartmentResponse, DepartmentRequest> {
 

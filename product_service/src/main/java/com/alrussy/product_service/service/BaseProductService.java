@@ -1,12 +1,11 @@
 package com.alrussy.product_service.service;
 
-import java.util.List;
-import java.util.Map;
-
 import com.alrussy.product_service.model.dto.PagedResult;
 import com.alrussy.product_service.model.dto.product_dto.ProductFilter;
 import com.alrussy.product_service.model.dto.product_dto.ProductRequest;
 import com.alrussy.product_service.model.dto.product_dto.ProductResponse;
+import java.util.List;
+import java.util.Map;
 
 public interface BaseProductService extends BaseService<Long, ProductResponse, ProductRequest> {
 

@@ -1,5 +1,6 @@
 package com.alrussy.product_service.model.entities;
 
+import com.alrussy.product_service.model.entities.table.BrandCategory;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,8 +20,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import com.alrussy.product_service.model.entities.table.BrandCategory;
 
 @Getter
 @Setter

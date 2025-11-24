@@ -1,16 +1,5 @@
 package com.alrussy.product_service.service.impls.category_impls;
 
-import jakarta.persistence.EntityNotFoundException;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Primary;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.alrussy.product_service.mapper.CategoryMapper;
 import com.alrussy.product_service.mapper.DepartmentMapper;
 import com.alrussy.product_service.mapper.impls.PageMapper;
@@ -27,6 +16,16 @@ import com.alrussy.product_service.model.entities.table.NamesDetailsAndCategory;
 import com.alrussy.product_service.repository.CategoryRepository;
 import com.alrussy.product_service.repository.specification.CategorySpecification;
 import com.alrussy.product_service.service.BaseCategoryService;
+import jakarta.persistence.EntityNotFoundException;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Primary
 @Service

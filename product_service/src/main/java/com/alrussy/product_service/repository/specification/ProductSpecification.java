@@ -1,5 +1,8 @@
 package com.alrussy.product_service.repository.specification;
 
+import com.alrussy.product_service.model.*;
+import com.alrussy.product_service.model.dto.product_dto.ProductFilter;
+import com.alrussy.product_service.model.entities.Product;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
@@ -13,10 +16,6 @@ import lombok.Setter;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
-
-import com.alrussy.product_service.model.*;
-import com.alrussy.product_service.model.dto.product_dto.ProductFilter;
-import com.alrussy.product_service.model.entities.Product;
 
 @Getter
 @Setter

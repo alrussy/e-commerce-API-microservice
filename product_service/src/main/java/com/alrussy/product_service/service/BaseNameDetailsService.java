@@ -1,9 +1,8 @@
 package com.alrussy.product_service.service;
 
-import java.util.List;
-
 import com.alrussy.product_service.model.dto.details_dto.NameDetailsRequest;
 import com.alrussy.product_service.model.dto.details_dto.NameDetailsResponse;
+import java.util.List;
 
 public interface BaseNameDetailsService extends BaseService<String, NameDetailsResponse, NameDetailsRequest> {
 

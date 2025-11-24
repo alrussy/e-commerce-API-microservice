@@ -1,5 +1,6 @@
 package com.alrussy.product_service.model.entities;
 
+import com.alrussy.product_service.model.entities.id.DepartmentId;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -10,9 +11,6 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.alrussy.product_service.model.entities.id.DepartmentId;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

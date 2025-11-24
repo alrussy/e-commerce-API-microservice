@@ -1,7 +1,6 @@
 package com.alrussy.product_service.model.entities.table;
 
 import com.alrussy.product_service.model.entities.SkuProduct;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

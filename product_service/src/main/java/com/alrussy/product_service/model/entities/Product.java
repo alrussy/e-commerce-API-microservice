@@ -1,5 +1,8 @@
 package com.alrussy.product_service.model.entities;
 
+import com.alrussy.product_service.model.entities.id.ProductId;
+import com.alrussy.product_service.model.entities.table.BrandCategory;
+import com.alrussy.product_service.model.entities.table.ValueDetailsAndProduct;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
@@ -24,10 +27,6 @@ import org.hibernate.annotations.JoinColumnOrFormula;
 import org.hibernate.annotations.JoinColumnsOrFormulas;
 import org.hibernate.annotations.JoinFormula;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import com.alrussy.product_service.model.entities.id.ProductId;
-import com.alrussy.product_service.model.entities.table.BrandCategory;
-import com.alrussy.product_service.model.entities.table.ValueDetailsAndProduct;
 
 @Getter
 @Setter

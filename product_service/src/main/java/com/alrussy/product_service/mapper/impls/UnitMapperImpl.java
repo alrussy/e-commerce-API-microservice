@@ -1,12 +1,11 @@
 package com.alrussy.product_service.mapper.impls;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
-
 import com.alrussy.product_service.mapper.UnitMapper;
 import com.alrussy.product_service.model.dto.unit_dto.UnitRequest;
 import com.alrussy.product_service.model.dto.unit_dto.UnitResponse;
 import com.alrussy.product_service.model.entities.Unit;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor

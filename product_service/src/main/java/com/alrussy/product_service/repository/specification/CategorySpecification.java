@@ -1,5 +1,9 @@
 package com.alrussy.product_service.repository.specification;
 
+import com.alrussy.product_service.model.dto.category_dto.CategoryFilter;
+import com.alrussy.product_service.model.entities.Category;
+import com.alrussy.product_service.model.entities.Department;
+import com.alrussy.product_service.model.entities.table.BrandCategory;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Join;
@@ -14,11 +18,6 @@ import lombok.Setter;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
-
-import com.alrussy.product_service.model.dto.category_dto.CategoryFilter;
-import com.alrussy.product_service.model.entities.Category;
-import com.alrussy.product_service.model.entities.Department;
-import com.alrussy.product_service.model.entities.table.BrandCategory;
 
 @Getter
 @Setter

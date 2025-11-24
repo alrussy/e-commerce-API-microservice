@@ -1,12 +1,11 @@
 package com.alrussy.product_service.service;
 
-import java.util.List;
-import java.util.Map;
-
 import com.alrussy.product_service.model.dto.PagedResult;
 import com.alrussy.product_service.model.dto.sku_product_dto.SkuProductFilter;
 import com.alrussy.product_service.model.dto.sku_product_dto.SkuProductRequest;
 import com.alrussy.product_service.model.dto.sku_product_dto.SkuProductResponse;
+import java.util.List;
+import java.util.Map;
 
 public interface BaseSkuProductService extends BaseService<String, SkuProductResponse, SkuProductRequest> {
 

@@ -3,7 +3,6 @@ package com.alrussy.product_service.model.entities.table;
 import com.alrussy.product_service.model.entities.Category;
 import com.alrussy.product_service.model.entities.NamesDetails;
 import com.alrussy.product_service.model.entities.id.NamesDetailsCategoryId;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;

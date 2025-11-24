@@ -1,5 +1,7 @@
 package com.alrussy.product_service.repository;
 
+import com.alrussy.product_service.model.entities.Product;
+import com.alrussy.product_service.model.entities.id.ProductId;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.EntityGraph;
@@ -8,9 +10,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.alrussy.product_service.model.entities.Product;
-import com.alrussy.product_service.model.entities.id.ProductId;
 
 public interface ProductRepository extends JpaRepository<Product, ProductId>, JpaSpecificationExecutor<Product> {
 

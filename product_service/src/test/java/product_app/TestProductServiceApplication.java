@@ -1,8 +1,7 @@
 package product_app;
 
-import org.springframework.boot.SpringApplication;
-
 import com.alrussy.product_service.ProductServiceApplication;
+import org.springframework.boot.SpringApplication;
 
 public class TestProductServiceApplication {
 

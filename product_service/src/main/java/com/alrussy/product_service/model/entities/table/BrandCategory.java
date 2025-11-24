@@ -3,7 +3,6 @@ package com.alrussy.product_service.model.entities.table;
 import com.alrussy.product_service.model.entities.Brand;
 import com.alrussy.product_service.model.entities.Category;
 import com.alrussy.product_service.model.entities.id.BrandCategoryId;
-
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;

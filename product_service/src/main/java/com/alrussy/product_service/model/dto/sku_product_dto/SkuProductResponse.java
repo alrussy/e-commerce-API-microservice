@@ -1,9 +1,8 @@
 package com.alrussy.product_service.model.dto.sku_product_dto;
 
+import com.alrussy.product_service.model.dto.product_dto.ProductResponse;
 import java.util.List;
 import java.util.Map;
-
-import com.alrussy.product_service.model.dto.product_dto.ProductResponse;
 
 public record SkuProductResponse(
         String skuCode,

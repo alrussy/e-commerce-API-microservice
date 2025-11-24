@@ -1,12 +1,5 @@
 package com.alrussy.product_service.service.impls.brand_Impls;
 
-import jakarta.persistence.EntityNotFoundException;
-import java.util.List;
-import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.alrussy.product_service.mapper.BrandMapper;
 import com.alrussy.product_service.mapper.impls.PageMapper;
 import com.alrussy.product_service.model.dto.PagedResult;
@@ -20,6 +13,12 @@ import com.alrussy.product_service.model.entities.table.BrandCategory;
 import com.alrussy.product_service.repository.BrandRepository;
 import com.alrussy.product_service.repository.specification.BrandSpecification;
 import com.alrussy.product_service.service.BaseBrandService;
+import jakarta.persistence.EntityNotFoundException;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor

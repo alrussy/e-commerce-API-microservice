@@ -1,11 +1,10 @@
 package com.alrussy.product_service.service;
 
-import java.util.Collection;
-import java.util.List;
-
 import com.alrussy.product_service.model.dto.category_dto.CategoryFilter;
 import com.alrussy.product_service.model.dto.category_dto.CategoryRequest;
 import com.alrussy.product_service.model.dto.category_dto.CategoryResponse;
+import java.util.Collection;
+import java.util.List;
 
 public interface BaseCategoryService extends BaseService<Long, CategoryResponse, CategoryRequest> {
 

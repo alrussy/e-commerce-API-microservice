@@ -1,13 +1,12 @@
 package com.alrussy.product_service.mapper.impls;
 
-import org.springframework.stereotype.Component;
-
 import com.alrussy.product_service.mapper.DepartmentMapper;
 import com.alrussy.product_service.model.dto.department_dto.DepartmentRequest;
 import com.alrussy.product_service.model.dto.department_dto.DepartmentResponse;
 import com.alrussy.product_service.model.entities.Category;
 import com.alrussy.product_service.model.entities.Department;
 import com.alrussy.product_service.model.entities.id.DepartmentId;
+import org.springframework.stereotype.Component;
 
 @Component
 public class DepartmentMapperImpl implements DepartmentMapper {

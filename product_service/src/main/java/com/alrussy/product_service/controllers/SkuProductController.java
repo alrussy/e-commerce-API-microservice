@@ -1,5 +1,11 @@
 package com.alrussy.product_service.controllers;
 
+import com.alrussy.product_service.model.dto.PagedResult;
+import com.alrussy.product_service.model.dto.sku_product_dto.SkuProductFilter;
+import com.alrussy.product_service.model.dto.sku_product_dto.SkuProductRequest;
+import com.alrussy.product_service.model.dto.sku_product_dto.SkuProductResponse;
+import com.alrussy.product_service.service.BaseSkuProductService;
+import com.alrussy.product_service.service.impls.sku_product_Impl.SkuProductServiceImpl;
 import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
@@ -17,13 +23,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.alrussy.product_service.model.dto.PagedResult;
-import com.alrussy.product_service.model.dto.sku_product_dto.SkuProductFilter;
-import com.alrussy.product_service.model.dto.sku_product_dto.SkuProductRequest;
-import com.alrussy.product_service.model.dto.sku_product_dto.SkuProductResponse;
-import com.alrussy.product_service.service.BaseSkuProductService;
-import com.alrussy.product_service.service.impls.sku_product_Impl.SkuProductServiceImpl;
 
 @RestController
 @RequestMapping("/products/sku")

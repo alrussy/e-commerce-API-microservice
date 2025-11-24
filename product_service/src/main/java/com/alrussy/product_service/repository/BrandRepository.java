@@ -1,5 +1,7 @@
 package com.alrussy.product_service.repository;
 
+import com.alrussy.product_service.model.dto.brand_dto.projections.BrandProjectionGlobal;
+import com.alrussy.product_service.model.entities.Brand;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -7,9 +9,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.alrussy.product_service.model.dto.brand_dto.projections.BrandProjectionGlobal;
-import com.alrussy.product_service.model.entities.Brand;
 
 public interface BrandRepository extends JpaRepository<Brand, Long>, JpaSpecificationExecutor<Brand> {
 

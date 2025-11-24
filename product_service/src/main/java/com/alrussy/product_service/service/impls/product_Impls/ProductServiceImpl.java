@@ -1,18 +1,5 @@
 package com.alrussy.product_service.service.impls.product_Impls;
 
-import jakarta.persistence.EntityNotFoundException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Order;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.alrussy.product_service.mapper.ProductMapper;
 import com.alrussy.product_service.mapper.impls.PageMapper;
 import com.alrussy.product_service.model.dto.PagedResult;
@@ -25,6 +12,18 @@ import com.alrussy.product_service.model.entities.table.ValueDetailsAndProduct;
 import com.alrussy.product_service.repository.ProductRepository;
 import com.alrussy.product_service.repository.specification.ProductSpecification;
 import com.alrussy.product_service.service.BaseProductService;
+import jakarta.persistence.EntityNotFoundException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor

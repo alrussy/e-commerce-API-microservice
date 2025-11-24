@@ -1,7 +1,6 @@
 package com.alrussy.product_service.model.entities;
 
 import com.alrussy.product_service.model.entities.id.ValueDetailsId;
-
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;

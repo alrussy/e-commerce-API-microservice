@@ -1,5 +1,10 @@
 package com.alrussy.product_service.controllers;
 
+import com.alrussy.product_service.model.dto.PagedResult;
+import com.alrussy.product_service.model.dto.product_dto.ProductFilter;
+import com.alrussy.product_service.model.dto.product_dto.ProductRequest;
+import com.alrussy.product_service.model.dto.product_dto.ProductResponse;
+import com.alrussy.product_service.service.BaseProductService;
 import jakarta.validation.Valid;
 import java.util.Collection;
 import java.util.List;
@@ -18,12 +23,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.alrussy.product_service.model.dto.PagedResult;
-import com.alrussy.product_service.model.dto.product_dto.ProductFilter;
-import com.alrussy.product_service.model.dto.product_dto.ProductRequest;
-import com.alrussy.product_service.model.dto.product_dto.ProductResponse;
-import com.alrussy.product_service.service.BaseProductService;
 
 @RestController
 @RequestMapping("/products")

@@ -1,12 +1,5 @@
 package com.alrussy.product_service.service.impls.group_category_impls;
 
-import jakarta.persistence.EntityNotFoundException;
-import java.util.List;
-import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Primary;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Service;
-
 import com.alrussy.product_service.mapper.GroupCategoryMapper;
 import com.alrussy.product_service.mapper.impls.PageMapper;
 import com.alrussy.product_service.model.dto.PagedResult;
@@ -16,6 +9,12 @@ import com.alrussy.product_service.model.dto.group_category_dto.GroupFilter;
 import com.alrussy.product_service.repository.GroupCategoryRepository;
 import com.alrussy.product_service.repository.specification.GroupSpecification;
 import com.alrussy.product_service.service.BaseGroupCategoryService;
+import jakarta.persistence.EntityNotFoundException;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
 
 @Primary
 @Service

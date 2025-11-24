@@ -1,7 +1,6 @@
 package com.alrussy.product_service.service;
 
 import com.alrussy.product_service.model.dto.PagedResult;
-
 import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass

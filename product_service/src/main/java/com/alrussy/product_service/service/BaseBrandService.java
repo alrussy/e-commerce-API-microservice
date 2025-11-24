@@ -1,10 +1,9 @@
 package com.alrussy.product_service.service;
 
-import java.util.List;
-
 import com.alrussy.product_service.model.dto.brand_dto.BrandFilter;
 import com.alrussy.product_service.model.dto.brand_dto.BrandRequest;
 import com.alrussy.product_service.model.dto.brand_dto.BrandResponse;
+import java.util.List;
 
 public interface BaseBrandService extends BaseService<Long, BrandResponse, BrandRequest> {
 

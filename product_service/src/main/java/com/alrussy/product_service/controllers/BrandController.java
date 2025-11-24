@@ -1,5 +1,10 @@
 package com.alrussy.product_service.controllers;
 
+import com.alrussy.product_service.model.dto.PagedResult;
+import com.alrussy.product_service.model.dto.brand_dto.BrandFilter;
+import com.alrussy.product_service.model.dto.brand_dto.BrandRequest;
+import com.alrussy.product_service.model.dto.brand_dto.BrandResponse;
+import com.alrussy.product_service.service.BaseBrandService;
 import jakarta.validation.Valid;
 import java.util.Collection;
 import java.util.List;
@@ -16,12 +21,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.alrussy.product_service.model.dto.PagedResult;
-import com.alrussy.product_service.model.dto.brand_dto.BrandFilter;
-import com.alrussy.product_service.model.dto.brand_dto.BrandRequest;
-import com.alrussy.product_service.model.dto.brand_dto.BrandResponse;
-import com.alrussy.product_service.service.BaseBrandService;
 
 @RestController
 @RequestMapping("/products/brands")

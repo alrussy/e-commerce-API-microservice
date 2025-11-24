@@ -1,9 +1,5 @@
 package com.alrussy.product_service.mapper.impls;
 
-import java.util.stream.Collectors;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
-
 import com.alrussy.product_service.mapper.ProductMapper;
 import com.alrussy.product_service.model.dto.details_dto.ProductDetailsResponse;
 import com.alrussy.product_service.model.dto.product_dto.ProductRequest;
@@ -17,6 +13,9 @@ import com.alrussy.product_service.model.entities.id.BrandCategoryId;
 import com.alrussy.product_service.model.entities.id.DepartmentId;
 import com.alrussy.product_service.model.entities.id.ProductId;
 import com.alrussy.product_service.model.entities.table.BrandCategory;
+import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor

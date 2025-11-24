@@ -1,9 +1,5 @@
 package com.alrussy.product_service.mapper.impls;
 
-import lombok.Getter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.alrussy.product_service.mapper.BrandMapper;
 import com.alrussy.product_service.mapper.CategoryMapper;
 import com.alrussy.product_service.mapper.DepartmentMapper;
@@ -12,6 +8,9 @@ import com.alrussy.product_service.model.dto.category_dto.CategoryResponse;
 import com.alrussy.product_service.model.dto.details_dto.NameDetailsResponse;
 import com.alrussy.product_service.model.entities.Category;
 import com.alrussy.product_service.model.entities.GroupCategory;
+import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component
 @Getter

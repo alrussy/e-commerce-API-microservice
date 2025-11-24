@@ -1,10 +1,9 @@
 package com.alrussy.product_service.service;
 
-import java.util.List;
-
 import com.alrussy.product_service.model.dto.group_category_dto.GroupCategoryRequest;
 import com.alrussy.product_service.model.dto.group_category_dto.GroupCategoryResponse;
 import com.alrussy.product_service.model.dto.group_category_dto.GroupFilter;
+import java.util.List;
 
 public interface BaseGroupCategoryService extends BaseService<Long, GroupCategoryResponse, GroupCategoryRequest> {
 

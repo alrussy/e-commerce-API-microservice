@@ -1,12 +1,11 @@
 package com.alrussy.product_service.mapper.impls;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
-
 import com.alrussy.product_service.mapper.GroupCategoryMapper;
 import com.alrussy.product_service.model.dto.group_category_dto.GroupCategoryRequest;
 import com.alrussy.product_service.model.dto.group_category_dto.GroupCategoryResponse;
 import com.alrussy.product_service.model.entities.GroupCategory;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor

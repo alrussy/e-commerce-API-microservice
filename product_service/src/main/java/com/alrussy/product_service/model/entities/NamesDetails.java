@@ -1,5 +1,6 @@
 package com.alrussy.product_service.model.entities;
 
+import com.alrussy.product_service.model.entities.table.NamesDetailsAndCategory;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -9,9 +10,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import com.alrussy.product_service.model.entities.table.NamesDetailsAndCategory;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
