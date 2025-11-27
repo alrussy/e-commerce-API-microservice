@@ -1,5 +1,6 @@
 package com.alrussy.customer_service.dto;
 
 public enum Gender {
-MALE,FAMALE
+    MALE,
+    FAMALE
 }

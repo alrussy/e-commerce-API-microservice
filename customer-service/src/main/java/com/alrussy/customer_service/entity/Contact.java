@@ -1,7 +1,5 @@
 package com.alrussy.customer_service.entity;
 
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
@@ -12,6 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Getter
 @Setter
@@ -20,13 +19,12 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @Entity(name = "contacts")
 @EntityListeners(AuditingEntityListener.class)
-
 public class Contact extends Audition {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	private String name;
-	private String number;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
+    private String name;
+    private String number;
 }

@@ -2,12 +2,11 @@ package com.alrussy.customer_service.service;
 
 import com.alrussy.customer_service.entity.Profile;
 
-public interface ProfileService extends  BaseService<String, Profile, Profile> {
+public interface ProfileService extends BaseService<String, Profile, Profile> {
 
-	void deleteByUsername(String userName);
-    
-	Profile findById(String username);
+    void deleteByUsername(String userName);
 
-	void deleteByIdAndUsername(Long id, String userName);
-   
+    Profile findById(String username);
+
+    void deleteByIdAndUsername(Long id, String userName);
 }

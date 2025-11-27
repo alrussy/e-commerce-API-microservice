@@ -10,7 +10,6 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
 @Getter
@@ -32,6 +31,4 @@ public class Audition {
     @CreatedBy
     @Column(nullable = false, updatable = false)
     private String username;
-
-    
 }

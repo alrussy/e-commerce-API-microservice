@@ -1,7 +1,5 @@
 package com.alrussy.customer_service.entity;
 
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
@@ -14,25 +12,28 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
 @Entity
-@Table(name = "favoriets", uniqueConstraints =
+@Table(
+        name = "favoriets",
+        uniqueConstraints =
                 @UniqueConstraint(
                         columnNames = {
                             "sku_code",
                             "username",
                         }))
 @EntityListeners(AuditingEntityListener.class)
-
 public class Favorite extends Audition {
-	
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private Long id;
-private String  skuCode;
-	
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String skuCode;
 }

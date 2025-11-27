@@ -1,4 +1,3 @@
 package com.alrussy.customer_service.dto;
 
-public record FavoriteRequest(String skuCode) {
-}
+public record FavoriteRequest(String skuCode) {}

@@ -7,10 +7,8 @@ import org.springframework.web.client.RestClient;
 @Configuration
 public class RestClientConfig {
 
-
-	@Bean
-	RestClient client() {
-		return RestClient.builder().baseUrl("http://localhost:9191").build();
-	}
-
+    @Bean
+    RestClient client() {
+        return RestClient.builder().baseUrl("http://localhost:9191").build();
+    }
 }
