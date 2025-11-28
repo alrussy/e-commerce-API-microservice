@@ -22,7 +22,7 @@ public class PublisherImpl implements Publisher {
     @Override
     public void publish(Event event) {
 
-        log.info("start publish Event {}",event);
+        log.info("start publish Event {}", event);
         switch (event) {
             case CancelledInvoiceProcurementEvent e -> template.send(applicationProperties.cancelledInvoiceTopic(), e);
             case UpdatedInvoiceProcurementEvent e -> template.send(applicationProperties.updatedInvoiceTopic(), e);
@@ -30,7 +30,6 @@ public class PublisherImpl implements Publisher {
             case ReceivedInvoiceProcurementEvent e -> template.send(applicationProperties.receivedInvoiceTopic(), e);
             default -> throw new IllegalArgumentException("Unexpected value: " + event);
         }
-        log.info("publish Event  {} is Successfuly",event);
-    
+        log.info("publish Event  {} is Successfuly", event);
     }
 }
