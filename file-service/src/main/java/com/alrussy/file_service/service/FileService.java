@@ -6,25 +6,22 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
-import org.springframework.web.client.RestClient;
 import org.springframework.web.multipart.MultipartFile;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class FileService {
-
-    private final RestClient client;
 
     @Value("${file.upload.base.url}")
     private String baseUrl;
@@ -44,7 +41,6 @@ public class FileService {
         Path targetLocation = fileStorageLocation.resolve(fileName);
 
         Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
-        // saveDataFile(dir,fileName);
         // Files.delete(targetLocation);
         log.info(targetLocation.toString());
         return "/images/" + dir + "/" + fileName;
@@ -73,42 +69,5 @@ public class FileService {
         //
         //				 });
 
-    }
-
-    private void saveDataFile(String dir, String filename, String id) {
-        MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
-
-        params.add("id", id);
-        params.add("url", "/api/files/images/" + dir + "/" + filename);
-
-        switch (dir) {
-            case "product": {
-                client.put()
-                        .uri("/api/products/add-image", t -> t.queryParams(params)
-                                .build())
-                        .retrieve()
-                        .toBodilessEntity();
-                break;
-            }
-            case "category": {
-                client.put()
-                        .uri("/api/products/categories/add-image", t -> t.queryParams(params)
-                                .build())
-                        .retrieve()
-                        .toBodilessEntity();
-                break;
-            }
-            case "brand": {
-                client.put()
-                        .uri("/api/products/brands/add-image", t -> t.queryParams(params)
-                                .build())
-                        .retrieve()
-                        .toBodilessEntity();
-                break;
-            }
-
-            default:
-                throw new IllegalArgumentException("the dir is not found value: " + dir);
-        }
     }
 }
